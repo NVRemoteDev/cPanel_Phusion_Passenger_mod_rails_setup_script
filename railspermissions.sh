@@ -87,8 +87,8 @@ chown -hR $cpanelLogin:nobody $appPath/*
 
 # Add to gem file
 echo -e "Adding gem lines"
-echo \'gem therubyracer\' >> $appPath/Gemfile
-echo \'gem execjs\' >> $appPath/Gemfile
+echo "gem 'therubyracer'" >> $appPath/Gemfile
+echo "gem 'execjs'" >> $appPath/Gemfile
 
 # Installing Gems
 echo -e "Installing gems. This may take a minute"
