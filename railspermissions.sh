@@ -7,7 +7,7 @@ echo -e ""
 
 echo -e "This script will add 2 lines to the end of your Gemfile (gem 'therubyracer' and gem 'execjs', as well as run a bundle install/bundle package"
 echo -e "Please enter no at the next question if this is not OK"
-echo ""
+echo -e ""
 
 # Ensure user has setup a rails app already
 echo "Have you already created your rails application (rails new app) [yes/no]?"
