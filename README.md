@@ -23,6 +23,6 @@ Instructions:<br />
 <li>That's it! Let the script do its thing.</li>
 </ul>
 
-NOTE: THERE IS NO ERROR CHECKING AT THIS TIME.  DOUBLE CHECK YOUR INPUTS FOR TYPOS.
+NOTE: THERE IS NO ERROR CHECKING AT THIS TIME.  DOUBLE CHECK YOUR INPUTS FOR ERRORS.
 
 If you run into any problems you can contact me at hill dot anthony AT live d0t com
