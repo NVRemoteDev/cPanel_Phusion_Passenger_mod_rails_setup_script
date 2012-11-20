@@ -1,9 +1,9 @@
 #!/bin/bash
 # Script will setup ruby rails permissions when running phusion passenger on cPanel
 
-echo "Setup your Ruby on Rails permissions on a cPanel server"
-echo "Tested on Phusion Passenger/mod_rails and cPanel 11"
-echo ""
+echo -e "Setup your Ruby on Rails permissions on a cPanel server"
+echo -e "Tested on Phusion Passenger/mod_rails and cPanel 11"
+echo -e ""
 
 echo -e "This script will add 2 lines to the end of your Gemfile (gem 'therubyracer' and gem 'execjs', as well as run a bundle install/bundle package"
 echo -e "Please enter no at the next question if this is not OK"
@@ -26,12 +26,12 @@ read cpanelLogin
 echo -e "Enter your domain as it appears in cPanel (no http or www) i.e.: mydomain.com"
 read domain
 
-echo "Enter the FULL path to your Ruby application (no trailing slash) i.e.: /home/$cpanelLogin/railsapp"
+echo -e "Enter the FULL path to your Ruby application (no trailing slash) i.e.: /home/$cpanelLogin/railsapp"
 read appPath
 
-echo ""
-echo "Enter public_html folder name (will be created) - no leading slash (i.e.: enter myrailsapp for http://www.$domain/myrailsapp) - Leave blank if whole domain will be a rails app *CAUTION*"
-echo "No support for nested paths"
+echo -e ""
+echo -e "Enter public_html folder name (will be created) - no leading slash (i.e.: enter myrailsapp for http://www.$domain/myrailsapp) - Leave blank if whole domain will be a rails app *CAUTION*"
+echo -e "No support for nested paths"
 read urlPath
 
 # Ensure correct information from user before continuing
@@ -47,7 +47,7 @@ fi
 echo ""
 
 # Add a symbolic link from public folder in rails app to URL path
-echo "Adding symbolic link from $appPath to /home/$cpanelLogin/public_html/$urlPath"
+echo -e "Adding symbolic link from $appPath to /home/$cpanelLogin/public_html/$urlPath"
 
 ln -s $appPath/public/ /home/$cpanelLogin/public_html/$urlPath
 
@@ -70,7 +70,7 @@ echo "	Options -MultiViews" >> /usr/local/apache/conf/userdata/std/2/$cpanelLogi
 echo "</Directory>" >> /usr/local/apache/conf/userdata/std/2/$cpanelLogin/$domain/$randomName.conf
 
 # Rebuild Apache confs
-echo "Rebuilding Apache configurations.  This may take a minute."
+echo -e "Rebuilding Apache configurations.  This may take a minute."
 
 /scripts/ensure_vhost_includes --user=$cpanelLogin
 /usr/local/cpanel/bin/apache_conf_distiller --update
@@ -78,27 +78,27 @@ echo "Rebuilding Apache configurations.  This may take a minute."
 service httpd restart
 
 # Set permissions
-echo "Setting directory permissions to $cpanelLogin else 500 error will happen"
-echo ""
+echo -e "Setting directory permissions to $cpanelLogin else 500 error will happen"
+echo -e ""
 
 chown -h $cpanelLogin:$cpanelLogin $appPath
 chown -h $cpanelLogin:nobody /home/$cpanelLogin/$urlPath
 chown -hR $cpanelLogin:nobody $appPath/*
 
 # Add to gem file
-echo "Adding gem lines"
+echo -e "Adding gem lines"
 echo \'gem therubyracer\' >> $appPath/Gemfile
 echo \'gem execjs\' >> $appPath/Gemfile
 
 # Installing Gems
-echo "Installing gems. This may take a minute"
+echo -e "Installing gems. This may take a minute"
 cd $appPath
 bundle install --path vendor
-echo ""
+echo -e ""
 bundle package
 
-echo "Restarting rails app..."
+echo -e "Restarting rails app..."
 touch $appPath/tmp/restart.txt
 
-echo ""
-echo "Finished!  Implement routing and controllers manually"
+echo -e ""
+echo -e "Finished!  Implement routing and controllers manually"
